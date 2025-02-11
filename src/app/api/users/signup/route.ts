@@ -2,6 +2,7 @@ import {connect} from "@/dbConfig/dbConfig" // Use correct case
 import User from "@/models/userModel"
 import {NextRequest, NextResponse} from "next/server"
 import bcryptjs from "bcryptjs"
+import { sendEmail } from "@/helpers/mailer"
 
 
 
@@ -49,6 +50,12 @@ export async function POST(request: NextRequest){
 
         const savedUser = await newUser.save();
         console.log("All User Data filler by user at Signup time :",savedUser);
+
+        //send email to user to verify email
+
+        await sendEmail({email, emailType: "VERIFY", userId: savedUser._id})
+
+
         return NextResponse.json({
             message: "User created successfully",
             success: true,
