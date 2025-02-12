@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FiLogOut } from "react-icons/fi"; // Logout Icon
 
+
 export default function ProfilePage() {
   const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,6 +23,24 @@ export default function ProfilePage() {
       toast.error(error.response?.data?.error || "Logout failed");
     }
   };
+
+  const emailVerification = async () => {
+    if (!user) return toast.error("User not found!");
+  
+    try {
+      await axios.post("/api/users/send-verification-email", {
+        email: user.email,
+        userId: user._id,
+      });
+  
+      toast.success("Verification email sent!");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error.response?.data?.error || "Failed to send verification email");
+    }
+  };
+  
+  
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -65,7 +84,9 @@ export default function ProfilePage() {
           <div className="flex justify-between items-center bg-gray-100 p-3 rounded-lg">
             <span className="text-gray-600">Verification</span>
             <span className={`text-sm font-medium ${user.isVerified ? "text-green-600" : "text-red-500"}`}>
-              {user.isVerified ? "Verified" : "Unverified"}
+              {user.isVerified ? "Verified" : (
+                <button onClick={emailVerification}>unverified</button>
+              )}
             </span>
           </div>
           <div className="flex justify-between items-center bg-gray-100 p-3 rounded-lg">

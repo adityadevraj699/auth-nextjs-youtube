@@ -3,17 +3,22 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
-    const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail';
+    
+    // ✅ Public pages jaha login required nahi hai
+    const isPublicPath = 
+        path === '/login' || 
+        path === '/signup';
+
     const token = request.cookies.get('token')?.value || '';
 
-    // Redirect logged-in users away from login/signup
+    // ✅ Agar user logged in hai, to login/signup access nahi honi chahiye
     if (isPublicPath && token) {
-        return NextResponse.redirect(new URL('/', request.url)); // ✅ Fixed
+        return NextResponse.redirect(new URL('/', request.url)); 
     }
 
-    // Restrict private routes if not logged in
+    // ✅ Private routes sirf logged-in users ke liye
     if (!isPublicPath && !token) {
-        return NextResponse.redirect(new URL('/login', request.url)); // ✅ Fixed
+        return NextResponse.redirect(new URL('/login', request.url)); 
     }
 
     return NextResponse.next();
@@ -23,9 +28,8 @@ export const config = {
     matcher: [
         '/',
         '/profile',
-        '/profile/:path*', // ✅ Allows protection of dynamic profile routes like `/profile/aditya`
+        '/profile/:path*', 
         '/login',
         '/signup',
-        '/verifyemail',
     ],
 };
