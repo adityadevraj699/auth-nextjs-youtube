@@ -12,7 +12,9 @@
     "auth-nextjs-youtube": "file:",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.475.0",
     "mongoose": "^8.10.0",
     "next": "15.1.6",
     "next-auth": "^4.24.11",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/bcryptjs": "^2.4.6",
+    "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.8",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",

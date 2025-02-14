@@ -52,12 +52,12 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold text-center">Reset Password</h2>
-        <p className="text-gray-600 text-center mb-4">Enter a new password below.</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black">
+      <div className="w-full max-w-md p-8 bg-gray-900 rounded-xl shadow-lg border border-violet-600">
+        <h2 className="text-2xl font-semibold text-center text-violet-500">Reset Password</h2>
+        <p className="text-gray-400 text-center mb-4">Enter a new password below.</p>
 
-        {message && <p className="text-center text-gray-700">{message}</p>}
+        {message && <p className="text-center text-green-400">{message}</p>}
 
         <form onSubmit={handleResetPassword} className="space-y-4">
           <input
@@ -66,12 +66,12 @@ export default function ResetPasswordPage() {
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             required
-            className="w-full p-2 border rounded-md"
+            className="w-full px-4 py-2 bg-gray-800 text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500"
           />
 
           <button
             type="submit"
-            className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="w-full py-2 bg-violet-600 text-white font-semibold rounded-lg hover:bg-violet-700 transition"
             disabled={loading}
           >
             {loading ? "Resetting..." : "Reset Password"}
